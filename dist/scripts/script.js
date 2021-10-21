@@ -26,13 +26,18 @@ addToList = (text) => {
     node.append(checkBtn, textNode, deleteBtn)
     list.appendChild(node);
 
-    checkEvent(checkBtn);
+    checkEvent(checkBtn, node);
+    deleteEvent(deleteBtn, node);
 }
 
-checkEvent = (object) => {
-    
-    object.addEventListener('click', (e) => {
-        console.log("🚀 ~ file: script.js ~ line 34 ~ checkBtn", e.paranteNode);
+checkEvent = (object, object2) => {  
+    object.addEventListener('click', () => {
+        object2.classList.toggle('line-through');
+    })
+}
 
+deleteEvent = (object, object2) => {
+    object.addEventListener('click', () => {
+        object2.remove();
     })
 }
