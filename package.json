@@ -1,0 +1,15 @@
+{
+    "name": "todo-list",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "build:css": "tailwind -i ./src/css/tailwind.css -o ./dist/css/tailwind.css -w"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "tailwindcss": "^2.2.17"
+    }
+}
