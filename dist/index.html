@@ -102,7 +102,8 @@
                                 </div>
 
                                 <!--Body-->
-                                <div
+                                <form
+                                    id="addListForm"
                                     class="
                                         flex flex-wrap flex-col
                                         space-y-4
@@ -134,7 +135,7 @@
                                         rows="4"
                                         placeholder="add a Description"
                                     ></textarea>
-                                </div>
+                                </form>
 
                                 <!--Footer-->
                                 <div class="flex justify-end pt-2 space-x-2">
@@ -173,13 +174,13 @@
             </div>
         </nav>
 
-        <section class="py-40">
-            <div class="max-w-6xl mx-auto px-4">
-                <div class="flex flex-wrap font-ubuntu font-medium">
-                    <div class="flex flex-col w-1/5 space-y-7">
+        <section class="pt-32">
+            <div class="max-w-6xl mx-auto px-4 max-h-screen">
+                <div class="flex flex-wrap font-ubuntu h-full scrollbar-hide">
+                    <div class="flex flex-col font-medium w-1/5 space-y-7">
                         <div
                             class="
-                                flex flex-1
+                                flex flex-1 flex-grow-0
                                 space-x-3
                                 p-2
                                 items-center
@@ -193,7 +194,7 @@
                         </div>
                         <div
                             class="
-                                flex flex-1
+                                flex flex-1 flex-grow-0
                                 space-x-3
                                 p-2
                                 items-center
@@ -207,7 +208,7 @@
                         </div>
                         <div
                             class="
-                                flex flex-1
+                                flex flex-1 flex-grow-0
                                 space-x-3
                                 p-2
                                 items-center
@@ -221,7 +222,7 @@
                         </div>
                         <div
                             class="
-                                flex flex-1
+                                flex flex-1 flex-grow-0
                                 space-x-3
                                 p-2
                                 items-center
@@ -234,19 +235,71 @@
                             <span>Complete</span>
                         </div>
                     </div>
-                    <div class="flex w-4/5 pl-2 bg-indigo-400">
-                        <div>
-                            <div>Title</div>
-                            <div>Description</div>
-                        </div>
-                    </div>
+
+                    <ul
+                        class="
+                            flex flex-wrap
+                            w-4/5
+                            pl-2
+                            font-poppins
+                            h-screen-4/5
+                            scrollbar-hide
+                            overflow-y-auto
+                        "
+                        id="list"
+                    >
+                        <li class="list-container">
+                            <div class="list-content">
+                                <div class="title-content">
+                                    <div class="text-2xl">Title</div>
+                                    <div>
+                                        <i class="fas fa-times"></i>
+                                    </div>
+                                </div>
+
+                                <div class="list-desc">
+                                    <p>
+                                        Lorem ipsum dolor sit amet consectetur
+                                        adipisicing elit. Dolor commodi
+                                        architecto perspiciatis qui sequi ipsam
+                                        fuga incidunt autem temporibus ratione.
+                                    </p>
+                                </div>
+                                <div class="list-btns">
+                                    <div class="space-x-1">
+                                        <button
+                                            class="bg-yellow-500 rounded-md p-1"
+                                        >
+                                            Todo
+                                        </button>
+                                        <button
+                                            class="bg-d2ceff rounded-md p-1"
+                                        >
+                                            In-progress
+                                        </button>
+                                        <button
+                                            class="bg-daf2a6 rounded-md p-1"
+                                        >
+                                            Complete
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <button>
+                                            <i class="far fa-check-square"></i>
+                                            <span>Check</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
 
-                <div class="text-lg font-ubuntu">Todo List</div>
+                <!-- <div class="text-lg font-ubuntu">Todo List</div>
 
                 <div>
                     <ul id="list"></ul>
-                </div>
+                </div> -->
             </div>
         </section>
 

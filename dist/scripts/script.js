@@ -10,6 +10,7 @@ const listItems = list.getElementsByTagName('li');
 submitBtn.addEventListener('click', () => {
     if (inputText.value || inputDesc.value) {
         addToList(inputText.value, inputDesc.value);
+        document.getElementById('addListForm').reset();
     }
 });
 
@@ -24,43 +25,83 @@ filterInprogressBtn.addEventListener('click', () => {
 
 addToList = (text, desc) => {
     let node = document.createElement('li');
+    node.classList.add('list-container');
 
-    let textNode = document.createElement('h3');
-    textNode.className = 'inline';
-    textNode.contentEditable = true;
-    textNode.innerHTML = text;
+    let listContent = document.createElement('div');
+    listContent.classList.add('list-content');
 
-    let textNodeDesc = document.createElement('p');
-    textNodeDesc.className = 'inline';
-    textNodeDesc.contentEditable = true;
-    textNodeDesc.innerHTML = desc;
+    let titileContent = document.createElement('div');
+    titileContent.classList.add('title-content');
+
+    let listTitle = document.createElement('div');
+    listTitle.classList.add('text-2xl');
+    listTitle.contentEditable = true;
+    listTitle.innerHTML = text;
+
+    let deleteBtn = document.createElement('div');
+    let deleteBtnIcon = document.createElement('i');
+    deleteBtnIcon.classList.add('fas', 'fa-times');
+    deleteBtn.append(deleteBtnIcon);
+
+    titileContent.append(listTitle, deleteBtn);
+
+
+    let listDesc = document.createElement('div');
+    listDesc.classList.add('list-desc');
+    let listDescP = document.createElement('p');
+    listDescP.contentEditable = true;
+    listDescP.innerHTML = desc;
+    listDesc.append(listDescP);
+
+    let listBtns = document.createElement('div');
+    listBtns.classList.add('list-btns');
+
+    let listBtnsLeft = document.createElement('div');
+    listBtnsLeft.classList.add('space-x-1');
+
+    let todoBtn = document.createElement('button');
+    todoBtn.classList.add('todoBtn', 'bg-yellow-500', 'rounded-md', 'p-1');
+    todoBtn.innerHTML = 'Todo'
 
     let inprogressBtn = document.createElement('button');
-    inprogressBtn.className = 'inprogressBtn';
+    inprogressBtn.classList.add('inprogressBtn', 'bg-d2ceff', 'rounded-md', 'p-1');
     inprogressBtn.innerHTML = 'In progress';
 
+    let completeBtn = document.createElement('button');
+    completeBtn.classList.add('complete', 'bg-daf2a6', 'rounded-md', 'p-1');
+    completeBtn.innerHTML = 'Complete';
+
+    listBtnsLeft.append(todoBtn, inprogressBtn, completeBtn);
+
+    let listBtnsRight = document.createElement('div');
+
     let checkBtn = document.createElement('button');
-    checkBtn.className = 'checkBtn';
-    checkBtn.innerHTML = 'Check';
+    checkBtn.classList.add('checkBtn');
+    let checkBtnIcon = document.createElement('i');
+    checkBtnIcon.classList.add('far', 'fa-check-square');
+    let checkBtnText = document.createElement('span');
+    checkBtnText.innerHTML = ' Check';
 
-    let deleteBtn = document.createElement('button');
-    deleteBtn.className = 'deleteBtn';
-    deleteBtn.innerHTML = 'Delete';
+    checkBtn.append(checkBtnIcon, checkBtnText);
+    listBtnsRight.append(checkBtn);
 
-    node.append(textNode, textNodeDesc, checkBtn, inprogressBtn, deleteBtn);
+
+    listBtns.append(listBtnsLeft, listBtnsRight);
+    listContent.append(titileContent, listDesc, listBtns)
+    node.append(listContent);
     list.appendChild(node);
 
-    checkEvent(checkBtn, node, textNode, textNodeDesc);
-    inprogressEvent(inprogressBtn, textNode, textNodeDesc, node);
+    checkEvent(checkBtn, node, listContent, inprogressBtn);
+    inprogressEvent(inprogressBtn, listContent, node);
     deleteEvent(deleteBtn, node);
 }
 
-checkEvent = (checkBtn, node, textNode, textNodeDesc) => {  
+checkEvent = (checkBtn, node, listContent, inprogressBtn) => {  
     checkBtn.addEventListener('click', () => {
         node.classList.toggle('line-through');
         node.classList.toggle('checked');
-        textNode.classList.remove('text-3xl');
-        textNodeDesc.classList.remove('text-3xl');
+        inprogressBtn.classList.remove('bg-d2ceff-600');
+        listContent.classList.remove('bg-d2ceff');
 
         sortCheckedEvent();
     })
@@ -72,10 +113,10 @@ deleteEvent = (deleteBtn, node) => {
     })
 }
 
-inprogressEvent = (inprogressBtn, textNode, textNodeDesc, node) => {
+inprogressEvent = (inprogressBtn, listContent, node) => {
     inprogressBtn.addEventListener('click', () => {
-        textNode.classList.toggle('text-3xl');
-        textNodeDesc.classList.toggle('text-3xl');
+        inprogressBtn.classList.toggle('bg-d2ceff-600');
+        listContent.classList.toggle('bg-d2ceff');
         node.classList.toggle('inprogress');
         node.classList.remove('checked','line-through');
     })
@@ -140,6 +181,8 @@ removeClass = (element, clName) => {
 
     element.className = classArray.join(" ");
 }
+
+// modal
 
 var openmodal = document.querySelectorAll('.modal-open')
     for (var i = 0; i < openmodal.length; i++) {

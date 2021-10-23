@@ -3,3 +3,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .list-container {
+        @apply w-full flex flex-col md:w-1/2 p-3;
+    }
+
+    .list-content {
+        @apply bg-fff9de
+        rounded-lg
+        shadow-lg
+        flex-shrink flex flex-col
+        p-4
+        space-y-4;
+    }
+
+    .title-content {
+        @apply flex justify-between items-center;
+    }
+
+    .list-desc {
+        @apply flex-1 text-sm font-normal;
+    }
+
+    .list-btns {
+        @apply flex
+        text-xs
+        justify-between
+        items-center;
+    }
+}
