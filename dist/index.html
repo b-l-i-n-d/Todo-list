@@ -8,38 +8,252 @@
 
         <link rel="stylesheet" href="./css/tailwind.css" />
     </head>
-    <body>
-        <div class="max-w-4xl mx-auto">
-            <div class="text-lg font-ubuntu">Todo List</div>
 
-            <form action="#">
-                <input
-                    class="border-2"
-                    type="text"
-                    name="text"
-                    id="inputText"
-                />
-                <textarea
-                    class="border-2"
-                    name="desc"
-                    id="inputDesc"
-                    cols="30"
-                    rows="10"
-                ></textarea>
+    <body class="text-69665c">
+        <nav class="bg-white font-ubuntu fixed top-0 inset-x-0 z-10">
+            <div class="max-w-6xl mx-auto px-4">
+                <div class="flex h-24 items-center justify-between">
+                    <div class="font-semibold text-4xl">
+                        <a href="#">
+                            <span class="text-d1e5f7">t</span>
+                            <span class="text-ffcece">o</span>
+                            <span class="text-daf2a6">d</span>
+                            <span class="text-d2ceff">o</span>
+                        </a>
+                    </div>
+                    <div class="modal-open cursor-pointer">
+                        <i class="fas fa-plus fa-lg text-69665c"></i>
+                    </div>
 
-                <input type="button" value="Save" id="submitBtn" />
-            </form>
+                    <!-- modal -->
+                    <div
+                        class="
+                            modal
+                            opacity-0
+                            pointer-events-none
+                            fixed
+                            w-full
+                            h-full
+                            top-0
+                            left-0
+                            flex
+                            items-center
+                            justify-center
+                        "
+                    >
+                        <div
+                            class="
+                                modal-overlay
+                                absolute
+                                w-full
+                                h-full
+                                bg-69665c
+                                opacity-50
+                            "
+                        ></div>
 
-            <div>
-                <button id="filterAll">All</button>
-                <button id="filterInprogress">Inprogress</button>
+                        <div
+                            class="
+                                modal-container
+                                bg-white
+                                w-11/12
+                                md:max-w-5xl
+                                mx-auto
+                                rounded-3xl
+                                shadow-lg
+                                z-50
+                                overflow-y-auto
+                                p-10
+                            "
+                        >
+                            <div
+                                class="
+                                    modal-close
+                                    absolute
+                                    top-0
+                                    right-0
+                                    cursor-pointer
+                                    flex flex-col
+                                    items-center
+                                    mt-4
+                                    mr-4
+                                    text-white text-sm
+                                    z-50
+                                "
+                            >
+                                <i class="fas fa-times fa-2x"></i>
+                            </div>
+
+                            <!-- Add margin if you want to see some of the overlay behind the modal-->
+                            <div class="modal-content py-4 text-left px-6">
+                                <!--Title-->
+                                <div class="flex justify-between items-center">
+                                    <p class="text-2xl font-bold">
+                                        Add <span class="text-d1e5f7">t</span>
+                                        <span class="text-ffcece">o</span>
+                                        <span class="text-daf2a6">d</span>
+                                        <span class="text-d2ceff">o</span>
+                                    </p>
+                                    <div
+                                        class="modal-close cursor-pointer z-50"
+                                    >
+                                        <i class="fas fa-times"></i>
+                                    </div>
+                                </div>
+
+                                <!--Body-->
+                                <div
+                                    class="
+                                        flex flex-wrap flex-col
+                                        space-y-4
+                                        py-6
+                                    "
+                                >
+                                    <label class="font-semibold" for="text"
+                                        >Title</label
+                                    >
+                                    <input
+                                        class="bg-gray-100 rounded-lg h-12 p-2"
+                                        type="text"
+                                        name="text"
+                                        id="inputText"
+                                        placeholder="add a title"
+                                    />
+                                    <label class="font-semibold" for="desc"
+                                        >Description</label
+                                    >
+                                    <textarea
+                                        class="
+                                            bg-gray-100
+                                            rounded-lg
+                                            p-2
+                                            resize-none
+                                        "
+                                        name="desc"
+                                        id="inputDesc"
+                                        rows="4"
+                                        placeholder="add a Description"
+                                    ></textarea>
+                                </div>
+
+                                <!--Footer-->
+                                <div class="flex justify-end pt-2 space-x-2">
+                                    <button
+                                        class="
+                                            modal-close
+                                            px-7
+                                            bg-gray-100
+                                            p-2
+                                            rounded-lg
+                                            hover:bg-gray-200
+                                            hover:text-gray-700
+                                        "
+                                        id="submitBtn"
+                                    >
+                                        Add
+                                    </button>
+                                    <button
+                                        class="
+                                            modal-close
+                                            px-7
+                                            bg-69665c
+                                            p-2
+                                            rounded-lg
+                                            text-white
+                                            hover:bg-gray-700
+                                        "
+                                    >
+                                        Cancle
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </nav>
 
-            <div>
-                <ul id="list"></ul>
+        <section class="py-40">
+            <div class="max-w-6xl mx-auto px-4">
+                <div class="flex flex-wrap font-ubuntu font-medium">
+                    <div class="flex flex-col w-1/5 space-y-7">
+                        <div
+                            class="
+                                flex flex-1
+                                space-x-3
+                                p-2
+                                items-center
+                                hover:bg-gray-100
+                                rounded-lg
+                            "
+                            id="filterAll"
+                        >
+                            <div class="h-8 w-8 bg-ffcece rounded-full"></div>
+                            <span>All</span>
+                        </div>
+                        <div
+                            class="
+                                flex flex-1
+                                space-x-3
+                                p-2
+                                items-center
+                                hover:bg-gray-100
+                                rounded-lg
+                            "
+                            id="filterTodo"
+                        >
+                            <div class="h-8 w-8 bg-fff9de rounded-full"></div>
+                            <span>Todo</span>
+                        </div>
+                        <div
+                            class="
+                                flex flex-1
+                                space-x-3
+                                p-2
+                                items-center
+                                hover:bg-gray-100
+                                rounded-lg
+                            "
+                            id="filterInprogress"
+                        >
+                            <div class="h-8 w-8 bg-d2ceff rounded-full"></div>
+                            <span>In-progress</span>
+                        </div>
+                        <div
+                            class="
+                                flex flex-1
+                                space-x-3
+                                p-2
+                                items-center
+                                hover:bg-gray-100
+                                rounded-lg
+                            "
+                            id="filterComplete"
+                        >
+                            <div class="h-8 w-8 bg-daf2a6 rounded-full"></div>
+                            <span>Complete</span>
+                        </div>
+                    </div>
+                    <div class="flex w-4/5 pl-2 bg-indigo-400">
+                        <div>
+                            <div>Title</div>
+                            <div>Description</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-lg font-ubuntu">Todo List</div>
+
+                <div>
+                    <ul id="list"></ul>
+                </div>
             </div>
-        </div>
+        </section>
 
+        <script
+            src="https://kit.fontawesome.com/1ae402c3f5.js"
+            crossorigin="anonymous"
+        ></script>
         <script src="./scripts/script.js"></script>
     </body>
 </html>
