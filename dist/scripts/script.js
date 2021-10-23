@@ -60,15 +60,15 @@ addToList = (text, desc) => {
     listBtnsLeft.classList.add('space-x-1');
 
     let todoBtn = document.createElement('button');
-    todoBtn.classList.add('todoBtn', 'bg-yellow-500', 'rounded-md', 'p-1');
-    todoBtn.innerHTML = 'Todo'
+    todoBtn.classList.add('todoBtn', 'bg-fff9de-600', 'rounded-md', 'p-1');
+    todoBtn.innerHTML = 'Todo';
 
     let inprogressBtn = document.createElement('button');
     inprogressBtn.classList.add('inprogressBtn', 'bg-d2ceff', 'rounded-md', 'p-1');
     inprogressBtn.innerHTML = 'In progress';
 
     let completeBtn = document.createElement('button');
-    completeBtn.classList.add('complete', 'bg-daf2a6', 'rounded-md', 'p-1');
+    completeBtn.classList.add('completeBtn', 'bg-daf2a6', 'rounded-md', 'p-1');
     completeBtn.innerHTML = 'Complete';
 
     listBtnsLeft.append(todoBtn, inprogressBtn, completeBtn);
@@ -91,17 +91,26 @@ addToList = (text, desc) => {
     node.append(listContent);
     list.appendChild(node);
 
-    checkEvent(checkBtn, node, listContent, inprogressBtn);
-    inprogressEvent(inprogressBtn, listContent, node);
+    todoEvent(todoBtn, listContent, node, inprogressBtn, completeBtn);
+    checkEvent(checkBtn, node, listContent, inprogressBtn, completeBtn);
+    inprogressEvent(inprogressBtn, listContent, node, completeBtn);
+    completeEvent(completeBtn, listContent, node, inprogressBtn);
     deleteEvent(deleteBtn, node);
 }
 
-checkEvent = (checkBtn, node, listContent, inprogressBtn) => {  
+checkEvent = (checkBtn, node, listContent, inprogressBtn, completeBtn) => {  
     checkBtn.addEventListener('click', () => {
+        if (node.classList.contains('inprogress')) {
+            node.classList.remove('inprogress');
+            inprogressBtn.classList.remove('bg-d2ceff-600');
+            listContent.classList.remove('bg-d2ceff');
+        } else {
+            node.classList.remove('complete');
+            completeBtn.classList.remove('bg-daf2a6-600');
+            listContent.classList.remove('bg-daf2a6');
+        }
         node.classList.toggle('line-through');
         node.classList.toggle('checked');
-        inprogressBtn.classList.remove('bg-d2ceff-600');
-        listContent.classList.remove('bg-d2ceff');
 
         sortCheckedEvent();
     })
@@ -113,12 +122,51 @@ deleteEvent = (deleteBtn, node) => {
     })
 }
 
-inprogressEvent = (inprogressBtn, listContent, node) => {
+inprogressEvent = (inprogressBtn, listContent, node, completeBtn) => {
     inprogressBtn.addEventListener('click', () => {
+        if (node.classList.contains('checked')) {
+            node.classList.remove('checked','line-through');
+        } else {
+            node.classList.remove('complete');
+            completeBtn.classList.remove('bg-daf2a6-600');
+            listContent.classList.remove('bg-daf2a6');
+        }
         inprogressBtn.classList.toggle('bg-d2ceff-600');
         listContent.classList.toggle('bg-d2ceff');
         node.classList.toggle('inprogress');
-        node.classList.remove('checked','line-through');
+
+    })
+}
+
+todoEvent = (todoBtn, listContent, node, inprogressBtn, completeBtn) => {
+    todoBtn.addEventListener('click', () => {
+        if (node.classList.contains('inprogress')) {
+            node.classList.remove('inprogress');
+            inprogressBtn.classList.remove('bg-d2ceff-600');
+            listContent.classList.remove('bg-d2ceff');
+        } else if (node.classList.contains('checked')) {
+            node.classList.remove('checked', 'line-through');
+        } else {
+            node.classList.remove('complete');
+            completeBtn.classList.remove('bg-daf2a6-600');
+            listContent.classList.remove('bg-daf2a6');
+        }
+    })
+}
+
+completeEvent = (completeBtn, listContent, node, inprogressBtn) => {
+    completeBtn.addEventListener('click', () => {
+        if (node.classList.contains('inprogress')) {
+            node.classList.remove('inprogress');
+            inprogressBtn.classList.remove('bg-d2ceff-600');
+            listContent.classList.remove('bg-d2ceff');
+        } else if (node.classList.contains('checked')) {
+            node.classList.remove('checked', 'line-through');
+        }
+
+        node.classList.toggle('complete');
+        listContent.classList.toggle('bg-daf2a6');
+        completeBtn.classList.toggle('bg-daf2a6-600');
     })
 }
 
