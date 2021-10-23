@@ -1,9 +1,11 @@
 const inputText = document.getElementById('inputText');
 const inputDesc = document.getElementById('inputDesc');
 const submitBtn = document.getElementById('submitBtn');
-const sortInprogressBtn = document.getElementById('sortInprogress');
+
+const filterAllBtn = document.getElementById('filterAll');
+const filterInprogressBtn = document.getElementById('filterInprogress');
 const list = document.getElementById('list');
-const listItems = list.childNodes;
+const listItems = list.getElementsByTagName('li');
 
 submitBtn.addEventListener('click', () => {
     if (inputText.value || inputDesc.value) {
@@ -11,8 +13,13 @@ submitBtn.addEventListener('click', () => {
     }
 });
 
-sortInprogressBtn.addEventListener('click', () => {
-    sortInprogressEvent();
+filterAllBtn.addEventListener('click', () => {
+    filterList('all');
+})
+
+filterInprogressBtn.addEventListener('click', () => {
+    // sortInprogressEvent();
+    filterList('inprogress');
 });
 
 addToList = (text, desc) => {
@@ -83,7 +90,7 @@ sortCheckedEvent = () => {
         }
     }
 
-    listItemsArr.sort((a, b) => {
+    listItemsArr.sort((b, a) => {
         return a.classList.contains('checked') > b.classList.contains('checked') ? 1 : -1;
     });
 
@@ -93,21 +100,62 @@ sortCheckedEvent = () => {
 
 }
 
-sortInprogressEvent = () => {
-    let listItemsArr = [];
+// sortInprogressEvent = () => {
+//     let listItemsArr = [];
 
-    for (let i in listItems) {
-        if (listItems[i].nodeType == 1) {
-            listItemsArr.push(listItems[i]);
+//     for (let i in listItems) {
+//         if (listItems[i].nodeType == 1) {
+//             listItemsArr.push(listItems[i]);
+//         }
+//     }
+
+//     listItemsArr.sort((a, b) => {
+//         return a.classList.contains('inprogress') > b.classList.contains('inprogress') ? 1 : -1;
+//     });
+
+//     for (let i = listItemsArr.length - 1 ; i >= 0; i--) {
+//         list.appendChild(listItemsArr[i])
+//     }
+
+// }
+
+filterList = (category) => {
+
+    if (category == 'all') {
+        category = '';        
+    }
+
+    for (let i = 0; i < listItems.length; i++) {
+        addClass(listItems[i], 'hidden');
+
+        if (listItems[i].className.indexOf(category) > -1) {
+            removeClass(listItems[i], 'hidden')
+        }
+        
+    }
+}
+
+addClass = (element, clName) => {
+    let classArray = element.className.split(' ');
+    let classArray2 = clName.split(' ');
+
+    for (let i = 0; i < classArray2.length; i++) {
+        if (classArray.indexOf(classArray2[i]) == -1) {
+            element.className += " " + classArray2[i];
+        }
+        
+    }
+}
+
+removeClass = (element, clName) => {
+    let classArray = element.className.split(' ');
+    let classArray2 = clName.split(' ');
+
+    for (let i = 0; i < classArray2.length; i++) {
+        while (classArray.indexOf(classArray2[i]) > -1) {
+            classArray.splice(classArray.indexOf(classArray2[i]), 1)
         }
     }
 
-    listItemsArr.sort((a, b) => {
-        return a.classList.contains('inprogress') > b.classList.contains('inprogress') ? 1 : -1;
-    });
-
-    for (let i = listItemsArr.length - 1 ; i >= 0; i--) {
-        list.appendChild(listItemsArr[i])
-    }
-
+    element.className = classArray.join(" ");
 }
