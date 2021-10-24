@@ -32,4 +32,27 @@
         justify-between
         items-center;
     }
+
+    .dropdown-container {
+        @apply inline-block relative;
+    }
+
+    .dropdown-list {
+        @apply absolute
+        hidden
+        -left-16
+        top-0
+        rounded-lg
+        text-sm
+        group-hover:block;
+    }
+
+    .dropdown-listItems {
+        @apply rounded-t
+        bg-white
+        hover:bg-gray-100
+        py-2
+        px-4
+        block;
+    }
 }

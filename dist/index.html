@@ -89,7 +89,9 @@
                                 <!--Title-->
                                 <div class="flex justify-between items-center">
                                     <p class="text-2xl font-bold">
-                                        Add <span class="text-d1e5f7">t</span>
+                                        <span>Add</span>
+                                        <span class="hidden">Edit</span>
+                                        <span class="text-d1e5f7">t</span>
                                         <span class="text-ffcece">o</span>
                                         <span class="text-daf2a6">d</span>
                                         <span class="text-d2ceff">o</span>
@@ -252,8 +254,23 @@
                             <div class="list-content">
                                 <div class="title-content">
                                     <div class="text-2xl">Title</div>
-                                    <div>
-                                        <i class="fas fa-times"></i>
+
+                                    <div class="dropdown-container group">
+                                        <i class="fas fa-caret-down"></i>
+                                        <ul class="dropdown-list">
+                                            <li
+                                                class="
+                                                    modal-open
+                                                    dropdown-listItems
+                                                "
+                                                id="editBtn"
+                                            >
+                                                Edit
+                                            </li>
+                                            <li class="dropdown-listItems">
+                                                Delete
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
 

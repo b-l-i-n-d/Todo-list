@@ -1,119 +1,134 @@
-const inputText = document.getElementById('inputText');
-const inputDesc = document.getElementById('inputDesc');
-const submitBtn = document.getElementById('submitBtn');
+const inputText = document.getElementById("inputText");
+const inputDesc = document.getElementById("inputDesc");
+const submitBtn = document.getElementById("submitBtn");
+const editBtn = document.getElementById("editBtn");
 
-const filterAllBtn = document.getElementById('filterAll');
-const filterInprogressBtn = document.getElementById('filterInprogress');
-const filterTodoBtn = document.getElementById('filterTodo');
-const filterCompleteBtn = document.getElementById('filterComplete');
+const filterAllBtn = document.getElementById("filterAll");
+const filterInprogressBtn = document.getElementById("filterInprogress");
+const filterTodoBtn = document.getElementById("filterTodo");
+const filterCompleteBtn = document.getElementById("filterComplete");
 
-const list = document.getElementById('list');
-const listItems = list.getElementsByTagName('li');
+const list = document.getElementById("list");
+const listItems = list.getElementsByTagName("li");
 
-submitBtn.addEventListener('click', () => {
+submitBtn.addEventListener("click", () => {
     if (inputText.value || inputDesc.value) {
         addToList(inputText.value, inputDesc.value);
-        document.getElementById('addListForm').reset();
+        document.getElementById("addListForm").reset();
     }
 });
 
-filterAllBtn.addEventListener('click', () => {
-    filterAllBtn.classList.add('bg-gray-200');
-    filterTodoBtn.classList.remove('bg-gray-200');
-    filterInprogressBtn.classList.remove('bg-gray-200');
-    filterCompleteBtn.classList.remove('bg-gray-200');
-    filterList('all');
-})
-
-filterInprogressBtn.addEventListener('click', () => {
-    filterAllBtn.classList.remove('bg-gray-200');
-    filterTodoBtn.classList.remove('bg-gray-200');
-    filterInprogressBtn.classList.add('bg-gray-200');
-    filterCompleteBtn.classList.remove('bg-gray-200');
-    filterList('inprogress');
+filterAllBtn.addEventListener("click", () => {
+    filterAllBtn.classList.add("bg-gray-200");
+    filterTodoBtn.classList.remove("bg-gray-200");
+    filterInprogressBtn.classList.remove("bg-gray-200");
+    filterCompleteBtn.classList.remove("bg-gray-200");
+    filterList("all");
 });
 
-filterTodoBtn.addEventListener('click', () => {
-    filterAllBtn.classList.remove('bg-gray-200');
-    filterTodoBtn.classList.add('bg-gray-200');
-    filterInprogressBtn.classList.remove('bg-gray-200');
-    filterCompleteBtn.classList.remove('bg-gray-200');
-    filterList('todo');
+filterInprogressBtn.addEventListener("click", () => {
+    filterAllBtn.classList.remove("bg-gray-200");
+    filterTodoBtn.classList.remove("bg-gray-200");
+    filterInprogressBtn.classList.add("bg-gray-200");
+    filterCompleteBtn.classList.remove("bg-gray-200");
+    filterList("inprogress");
 });
 
-filterCompleteBtn.addEventListener('click', () => {
-    filterAllBtn.classList.remove('bg-gray-200');
-    filterTodoBtn.classList.remove('bg-gray-200');
-    filterInprogressBtn.classList.remove('bg-gray-200');
-    filterCompleteBtn.classList.add('bg-gray-200');
-    filterList('complete');
-})
+filterTodoBtn.addEventListener("click", () => {
+    filterAllBtn.classList.remove("bg-gray-200");
+    filterTodoBtn.classList.add("bg-gray-200");
+    filterInprogressBtn.classList.remove("bg-gray-200");
+    filterCompleteBtn.classList.remove("bg-gray-200");
+    filterList("todo");
+});
+
+filterCompleteBtn.addEventListener("click", () => {
+    filterAllBtn.classList.remove("bg-gray-200");
+    filterTodoBtn.classList.remove("bg-gray-200");
+    filterInprogressBtn.classList.remove("bg-gray-200");
+    filterCompleteBtn.classList.add("bg-gray-200");
+    filterList("complete");
+});
 
 addToList = (text, desc) => {
-    let node = document.createElement('li');
-    node.classList.add('list-container', 'todo');
+    let node = document.createElement("li");
+    node.classList.add("list-container", "todo");
 
-    let listContent = document.createElement('div');
-    listContent.classList.add('list-content');
+    let listContent = document.createElement("div");
+    listContent.classList.add("list-content");
 
-    let titileContent = document.createElement('div');
-    titileContent.classList.add('title-content');
+    let titileContent = document.createElement("div");
+    titileContent.classList.add("title-content");
 
-    let listTitle = document.createElement('div');
-    listTitle.classList.add('text-2xl');
+    let listTitle = document.createElement("div");
+    listTitle.classList.add("text-2xl");
     listTitle.contentEditable = true;
     listTitle.innerHTML = text;
 
-    let deleteBtn = document.createElement('div');
-    let deleteBtnIcon = document.createElement('i');
-    deleteBtnIcon.classList.add('fas', 'fa-times');
-    deleteBtn.append(deleteBtnIcon);
+    let dropdownContainer = document.createElement('div');
+    dropdownContainer.classList.add('dropdown-container', 'group');
+    let dropdownIcon = document.createElement('i');
+    dropdownIcon.classList.add('fas', 'fa-caret-down');
+    let dropdownList = document.createElement('ul');
+    dropdownList.classList.add('dropdown-list');
+    let editBtn = document.createElement('li');
+    editBtn.classList.add('modal-open', 'dropdown-listItems');
+    editBtn.innerText = 'Edit';
+    let deleteBtn = document.createElement("li");
+    deleteBtn.classList.add('dropdown-listItems');
+    deleteBtn.innerText = 'Delete';
 
-    titileContent.append(listTitle, deleteBtn);
+    dropdownList.append(editBtn, deleteBtn);
+    dropdownContainer.append(dropdownIcon, dropdownList);
 
+    titileContent.append(listTitle, dropdownContainer);
 
-    let listDesc = document.createElement('div');
-    listDesc.classList.add('list-desc');
-    let listDescP = document.createElement('p');
+    let listDesc = document.createElement("div");
+    listDesc.classList.add("list-desc");
+    let listDescP = document.createElement("p");
     listDescP.contentEditable = true;
     listDescP.innerHTML = desc;
     listDesc.append(listDescP);
 
-    let listBtns = document.createElement('div');
-    listBtns.classList.add('list-btns');
+    let listBtns = document.createElement("div");
+    listBtns.classList.add("list-btns");
 
-    let listBtnsLeft = document.createElement('div');
-    listBtnsLeft.classList.add('space-x-1');
+    let listBtnsLeft = document.createElement("div");
+    listBtnsLeft.classList.add("space-x-1");
 
-    let todoBtn = document.createElement('button');
-    todoBtn.classList.add('todoBtn', 'bg-fff9de-600', 'rounded-md', 'p-1');
-    todoBtn.innerHTML = 'Todo';
+    let todoBtn = document.createElement("button");
+    todoBtn.classList.add("todoBtn", "bg-fff9de-600", "rounded-md", "p-1");
+    todoBtn.innerHTML = "Todo";
 
-    let inprogressBtn = document.createElement('button');
-    inprogressBtn.classList.add('inprogressBtn', 'bg-d2ceff', 'rounded-md', 'p-1');
-    inprogressBtn.innerHTML = 'In progress';
+    let inprogressBtn = document.createElement("button");
+    inprogressBtn.classList.add(
+        "inprogressBtn",
+        "bg-d2ceff",
+        "rounded-md",
+        "p-1"
+    );
+    inprogressBtn.innerHTML = "In progress";
 
-    let completeBtn = document.createElement('button');
-    completeBtn.classList.add('completeBtn', 'bg-daf2a6', 'rounded-md', 'p-1');
-    completeBtn.innerHTML = 'Complete';
+    let completeBtn = document.createElement("button");
+    completeBtn.classList.add("completeBtn", "bg-daf2a6", "rounded-md", "p-1");
+    completeBtn.innerHTML = "Complete";
 
     listBtnsLeft.append(todoBtn, inprogressBtn, completeBtn);
 
-    let listBtnsRight = document.createElement('div');
+    let listBtnsRight = document.createElement("div");
 
-    let checkBtn = document.createElement('button');
-    checkBtn.classList.add('checkBtn');
-    let checkBtnIcon = document.createElement('i');
-    checkBtnIcon.classList.add('far', 'fa-check-square');
-    let checkBtnText = document.createElement('span');
-    checkBtnText.innerHTML = ' Check';
+    let checkBtn = document.createElement("button");
+    checkBtn.classList.add("checkBtn");
+    let checkBtnIcon = document.createElement("i");
+    checkBtnIcon.classList.add("far", "fa-check-square");
+    let checkBtnText = document.createElement("span");
+    checkBtnText.innerHTML = " Check";
 
     checkBtn.append(checkBtnIcon, checkBtnText);
     listBtnsRight.append(checkBtn);
 
-
     listBtns.append(listBtnsLeft, listBtnsRight);
-    listContent.append(titileContent, listDesc, listBtns)
+    listContent.append(titileContent, listDesc, listBtns);
     node.append(listContent);
     list.appendChild(node);
 
@@ -122,86 +137,93 @@ addToList = (text, desc) => {
     inprogressEvent(inprogressBtn, listContent, node, completeBtn);
     completeEvent(completeBtn, listContent, node, inprogressBtn);
     deleteEvent(deleteBtn, node);
-}
+};
 
-checkEvent = (checkBtn, node, listContent, inprogressBtn, completeBtn) => {  
-    checkBtn.addEventListener('click', () => {
-        if (node.classList.contains('inprogress')) {
-            node.classList.remove('inprogress');
-            inprogressBtn.classList.remove('bg-d2ceff-600');
-            listContent.classList.remove('bg-d2ceff');
+editEvent = (listTitle, listDescP) => {
+    editBtn.addEventListener("click", () => {
+        let modalContent = document.querySelectorAll(".modal-content p span");
+        modalContent[0].classList.add("hidden");
+        modalContent[1].classList.remove("hidden");
+    });
+};
+
+checkEvent = (checkBtn, node, listContent, inprogressBtn, completeBtn) => {
+    checkBtn.addEventListener("click", () => {
+        if (node.classList.contains("inprogress")) {
+            node.classList.remove("inprogress");
+            inprogressBtn.classList.remove("bg-d2ceff-600");
+            listContent.classList.remove("bg-d2ceff");
         } else {
-            node.classList.remove('complete');
-            completeBtn.classList.remove('bg-daf2a6-600');
-            listContent.classList.remove('bg-daf2a6');
+            node.classList.remove("complete");
+            completeBtn.classList.remove("bg-daf2a6-600");
+            listContent.classList.remove("bg-daf2a6");
         }
-        node.classList.toggle('line-through');
-        node.classList.toggle('checked');
+        node.classList.toggle("line-through");
+        node.classList.toggle("checked");
 
         sortCheckedEvent();
-    })
-}
+    });
+};
 
 deleteEvent = (deleteBtn, node) => {
-    deleteBtn.addEventListener('click', () => {
+    deleteBtn.addEventListener("click", () => {
         node.remove();
-    })
-}
+    });
+};
 
 inprogressEvent = (inprogressBtn, listContent, node, completeBtn) => {
-    inprogressBtn.addEventListener('click', () => {
-        if (node.classList.contains('checked')) {
-            node.classList.remove('checked','line-through');
-        } else if (node.classList.contains('complete')) {
-            node.classList.remove('complete');
-            completeBtn.classList.remove('bg-daf2a6-600');
-            listContent.classList.remove('bg-daf2a6');
+    inprogressBtn.addEventListener("click", () => {
+        if (node.classList.contains("checked")) {
+            node.classList.remove("checked", "line-through");
+        } else if (node.classList.contains("complete")) {
+            node.classList.remove("complete");
+            completeBtn.classList.remove("bg-daf2a6-600");
+            listContent.classList.remove("bg-daf2a6");
         } else {
-            node.classList.toggle('todo');
+            node.classList.toggle("todo");
         }
 
-        inprogressBtn.classList.toggle('bg-d2ceff-600');
-        listContent.classList.toggle('bg-d2ceff');
-        node.classList.toggle('inprogress');
-
-    })
-}
+        inprogressBtn.classList.toggle("bg-d2ceff-600");
+        listContent.classList.toggle("bg-d2ceff");
+        node.classList.toggle("inprogress");
+    });
+};
 
 todoEvent = (todoBtn, listContent, node, inprogressBtn, completeBtn) => {
-    todoBtn.addEventListener('click', () => {
-        if (node.classList.contains('inprogress')) {
-            node.classList.remove('inprogress');
-            inprogressBtn.classList.remove('bg-d2ceff-600');
-            listContent.classList.remove('bg-d2ceff');
-        } else if (node.classList.contains('checked')) {
-            node.classList.remove('checked', 'line-through');
+    todoBtn.addEventListener("click", () => {
+        if (node.classList.contains("inprogress")) {
+            node.classList.remove("inprogress");
+            inprogressBtn.classList.remove("bg-d2ceff-600");
+            listContent.classList.remove("bg-d2ceff");
+        } else if (node.classList.contains("checked")) {
+            node.classList.remove("checked", "line-through");
         } else {
-            node.classList.remove('complete');
-            completeBtn.classList.remove('bg-daf2a6-600');
-            listContent.classList.remove('bg-daf2a6');
+            node.classList.remove("complete");
+            completeBtn.classList.remove("bg-daf2a6-600");
+            listContent.classList.remove("bg-daf2a6");
         }
 
-        node.classList.add('todo');
-    })
-}
+        node.classList.add("todo");
+    });
+};
 
 completeEvent = (completeBtn, listContent, node, inprogressBtn) => {
-    completeBtn.addEventListener('click', () => {
-        if (node.classList.contains('inprogress')) {
-            node.classList.remove('inprogress');
-            inprogressBtn.classList.remove('bg-d2ceff-600');
-            listContent.classList.remove('bg-d2ceff');
-        } else if (node.classList.contains('checked')) {
-            node.classList.remove('checked', 'line-through');
+    completeBtn.addEventListener("click", () => {
+        if (node.classList.contains("inprogress")) {
+            node.classList.remove("inprogress");
+            inprogressBtn.classList.remove("bg-d2ceff-600");
+            listContent.classList.remove("bg-d2ceff");
+        } else if (node.classList.contains("checked")) {
+            node.classList.remove("checked", "line-through");
         } else {
-            node.classList.toggle('todo');
+            node.classList.toggle("todo");
         }
 
-        node.classList.toggle('complete');
-        listContent.classList.toggle('bg-daf2a6');
-        completeBtn.classList.toggle('bg-daf2a6-600');
-    })
-}
+        node.classList.toggle("complete");
+        listContent.classList.toggle("bg-daf2a6");
+        completeBtn.classList.toggle("bg-daf2a6-600");
+    });
+};
 
 sortCheckedEvent = () => {
     let listItemsArr = [];
@@ -213,93 +235,89 @@ sortCheckedEvent = () => {
     }
 
     listItemsArr.sort((b, a) => {
-        return a.classList.contains('checked') > b.classList.contains('checked') ? 1 : -1;
+        return a.classList.contains("checked") > b.classList.contains("checked")
+            ? 1
+            : -1;
     });
 
-    for (let i = listItemsArr.length - 1 ; i >= 0; i--) {
-        list.appendChild(listItemsArr[i])
+    for (let i = listItemsArr.length - 1; i >= 0; i--) {
+        list.appendChild(listItemsArr[i]);
     }
-
-}
+};
 
 filterList = (category) => {
-
-    if (category == 'all') {
-        category = '';        
+    if (category == "all") {
+        category = "";
     }
 
     for (let i = 0; i < listItems.length; i++) {
-        addClass(listItems[i], 'hidden');
+        addClass(listItems[i], "hidden");
 
         if (listItems[i].className.indexOf(category) > -1) {
-            removeClass(listItems[i], 'hidden')
+            removeClass(listItems[i], "hidden");
         }
-        
     }
-}
+};
 
 addClass = (element, clName) => {
-    let classArray = element.className.split(' ');
-    let classArray2 = clName.split(' ');
+    let classArray = element.className.split(" ");
+    let classArray2 = clName.split(" ");
 
     for (let i = 0; i < classArray2.length; i++) {
         if (classArray.indexOf(classArray2[i]) == -1) {
             element.className += " " + classArray2[i];
         }
-        
     }
-}
+};
 
 removeClass = (element, clName) => {
-    let classArray = element.className.split(' ');
-    let classArray2 = clName.split(' ');
+    let classArray = element.className.split(" ");
+    let classArray2 = clName.split(" ");
 
     for (let i = 0; i < classArray2.length; i++) {
         while (classArray.indexOf(classArray2[i]) > -1) {
-            classArray.splice(classArray.indexOf(classArray2[i]), 1)
+            classArray.splice(classArray.indexOf(classArray2[i]), 1);
         }
     }
 
     element.className = classArray.join(" ");
-}
+};
 
 // modal
 
-var openmodal = document.querySelectorAll('.modal-open')
-    for (var i = 0; i < openmodal.length; i++) {
-      openmodal[i].addEventListener('click', function(event){
-    	event.preventDefault()
-    	toggleModal()
-      })
+var openmodal = document.querySelectorAll(".modal-open");
+for (var i = 0; i < openmodal.length; i++) {
+    openmodal[i].addEventListener("click", function (event) {
+        event.preventDefault();
+        toggleModal();
+    });
+}
+
+const overlay = document.querySelector(".modal-overlay");
+overlay.addEventListener("click", toggleModal);
+
+var closemodal = document.querySelectorAll(".modal-close");
+for (var i = 0; i < closemodal.length; i++) {
+    closemodal[i].addEventListener("click", toggleModal);
+}
+
+document.onkeydown = function (evt) {
+    evt = evt || window.event;
+    var isEscape = false;
+    if ("key" in evt) {
+        isEscape = evt.key === "Escape" || evt.key === "Esc";
+    } else {
+        isEscape = evt.keyCode === 27;
     }
-    
-    const overlay = document.querySelector('.modal-overlay')
-    overlay.addEventListener('click', toggleModal)
-    
-    var closemodal = document.querySelectorAll('.modal-close')
-    for (var i = 0; i < closemodal.length; i++) {
-      closemodal[i].addEventListener('click', toggleModal)
+    if (isEscape && document.body.classList.contains("modal-active")) {
+        toggleModal();
     }
-    
-    document.onkeydown = function(evt) {
-      evt = evt || window.event
-      var isEscape = false
-      if ("key" in evt) {
-    	isEscape = (evt.key === "Escape" || evt.key === "Esc")
-      } else {
-    	isEscape = (evt.keyCode === 27)
-      }
-      if (isEscape && document.body.classList.contains('modal-active')) {
-    	toggleModal()
-      }
-    };
-    
-    
-    function toggleModal () {
-      const body = document.querySelector('body')
-      const modal = document.querySelector('.modal')
-      modal.classList.toggle('opacity-0')
-      modal.classList.toggle('pointer-events-none')
-      body.classList.toggle('modal-active')
-    }
-    
+};
+
+function toggleModal() {
+    const body = document.querySelector("body");
+    const modal = document.querySelector(".modal");
+    modal.classList.toggle("opacity-0");
+    modal.classList.toggle("pointer-events-none");
+    body.classList.toggle("modal-active");
+}
