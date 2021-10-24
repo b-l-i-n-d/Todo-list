@@ -1,7 +1,6 @@
 const inputText = document.getElementById("inputText");
 const inputDesc = document.getElementById("inputDesc");
 const submitBtn = document.getElementById("submitBtn");
-const editBtn = document.getElementById("editBtn");
 
 const filterAllBtn = document.getElementById("filterAll");
 const filterInprogressBtn = document.getElementById("filterInprogress");
@@ -132,6 +131,7 @@ addToList = (text, desc) => {
     node.append(listContent);
     list.appendChild(node);
 
+    editEvent(editBtn, listTitle, listDescP);
     todoEvent(todoBtn, listContent, node, inprogressBtn, completeBtn);
     checkEvent(checkBtn, node, listContent, inprogressBtn, completeBtn);
     inprogressEvent(inprogressBtn, listContent, node, completeBtn);
@@ -139,11 +139,20 @@ addToList = (text, desc) => {
     deleteEvent(deleteBtn, node);
 };
 
-editEvent = (listTitle, listDescP) => {
+editEvent = (editBtn, listTitle, listDescP) => {
     editBtn.addEventListener("click", () => {
+        toggleModal();
         let modalContent = document.querySelectorAll(".modal-content p span");
+        let editText = document.getElementById("inputText");
+        let editDesc = document.getElementById("inputDesc");
+
+
         modalContent[0].classList.add("hidden");
         modalContent[1].classList.remove("hidden");
+
+        editText.value = listTitle.innerText;
+        editDesc.value = listDescP.innerText;
+
     });
 };
 
