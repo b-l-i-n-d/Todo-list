@@ -4,6 +4,9 @@ const submitBtn = document.getElementById('submitBtn');
 
 const filterAllBtn = document.getElementById('filterAll');
 const filterInprogressBtn = document.getElementById('filterInprogress');
+const filterTodoBtn = document.getElementById('filterTodo');
+const filterCompleteBtn = document.getElementById('filterComplete');
+
 const list = document.getElementById('list');
 const listItems = list.getElementsByTagName('li');
 
@@ -15,17 +18,40 @@ submitBtn.addEventListener('click', () => {
 });
 
 filterAllBtn.addEventListener('click', () => {
+    filterAllBtn.classList.add('bg-gray-200');
+    filterTodoBtn.classList.remove('bg-gray-200');
+    filterInprogressBtn.classList.remove('bg-gray-200');
+    filterCompleteBtn.classList.remove('bg-gray-200');
     filterList('all');
 })
 
 filterInprogressBtn.addEventListener('click', () => {
-    // sortInprogressEvent();
+    filterAllBtn.classList.remove('bg-gray-200');
+    filterTodoBtn.classList.remove('bg-gray-200');
+    filterInprogressBtn.classList.add('bg-gray-200');
+    filterCompleteBtn.classList.remove('bg-gray-200');
     filterList('inprogress');
 });
 
+filterTodoBtn.addEventListener('click', () => {
+    filterAllBtn.classList.remove('bg-gray-200');
+    filterTodoBtn.classList.add('bg-gray-200');
+    filterInprogressBtn.classList.remove('bg-gray-200');
+    filterCompleteBtn.classList.remove('bg-gray-200');
+    filterList('todo');
+});
+
+filterCompleteBtn.addEventListener('click', () => {
+    filterAllBtn.classList.remove('bg-gray-200');
+    filterTodoBtn.classList.remove('bg-gray-200');
+    filterInprogressBtn.classList.remove('bg-gray-200');
+    filterCompleteBtn.classList.add('bg-gray-200');
+    filterList('complete');
+})
+
 addToList = (text, desc) => {
     let node = document.createElement('li');
-    node.classList.add('list-container');
+    node.classList.add('list-container', 'todo');
 
     let listContent = document.createElement('div');
     listContent.classList.add('list-content');
@@ -126,11 +152,14 @@ inprogressEvent = (inprogressBtn, listContent, node, completeBtn) => {
     inprogressBtn.addEventListener('click', () => {
         if (node.classList.contains('checked')) {
             node.classList.remove('checked','line-through');
-        } else {
+        } else if (node.classList.contains('complete')) {
             node.classList.remove('complete');
             completeBtn.classList.remove('bg-daf2a6-600');
             listContent.classList.remove('bg-daf2a6');
+        } else {
+            node.classList.toggle('todo');
         }
+
         inprogressBtn.classList.toggle('bg-d2ceff-600');
         listContent.classList.toggle('bg-d2ceff');
         node.classList.toggle('inprogress');
@@ -151,6 +180,8 @@ todoEvent = (todoBtn, listContent, node, inprogressBtn, completeBtn) => {
             completeBtn.classList.remove('bg-daf2a6-600');
             listContent.classList.remove('bg-daf2a6');
         }
+
+        node.classList.add('todo');
     })
 }
 
@@ -162,6 +193,8 @@ completeEvent = (completeBtn, listContent, node, inprogressBtn) => {
             listContent.classList.remove('bg-d2ceff');
         } else if (node.classList.contains('checked')) {
             node.classList.remove('checked', 'line-through');
+        } else {
+            node.classList.toggle('todo');
         }
 
         node.classList.toggle('complete');
