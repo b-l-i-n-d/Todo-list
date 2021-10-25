@@ -200,7 +200,7 @@
         <section class="pt-32">
             <div class="max-w-6xl mx-auto px-4 max-h-screen">
                 <div class="flex flex-wrap font-ubuntu h-full scrollbar-hide">
-                    <div class="flex flex-col font-medium w-1/5 space-y-7">
+                    <div class="flex flex-col font-medium w-1/5 space-y-6">
                         <div
                             class="
                                 flex flex-1 flex-grow-0
@@ -212,7 +212,15 @@
                             "
                             id="filterAll"
                         >
-                            <div class="h-8 w-8 bg-ffcece rounded-full"></div>
+                            <div
+                                class="
+                                    h-8
+                                    w-8
+                                    bg-ffcece
+                                    rounded-full
+                                    ring-2 ring-red-300
+                                "
+                            ></div>
                             <span>All</span>
                         </div>
                         <div
@@ -226,7 +234,15 @@
                             "
                             id="filterTodo"
                         >
-                            <div class="h-8 w-8 bg-fff9de rounded-full"></div>
+                            <div
+                                class="
+                                    h-8
+                                    w-8
+                                    bg-fff9de
+                                    rounded-full
+                                    ring-2 ring-yellow-400
+                                "
+                            ></div>
                             <span>Todo</span>
                         </div>
                         <div
@@ -240,7 +256,15 @@
                             "
                             id="filterInprogress"
                         >
-                            <div class="h-8 w-8 bg-d2ceff rounded-full"></div>
+                            <div
+                                class="
+                                    h-8
+                                    w-8
+                                    bg-d2ceff
+                                    rounded-full
+                                    ring-2 ring-purple-400
+                                "
+                            ></div>
                             <span>In-progress</span>
                         </div>
                         <div
@@ -254,7 +278,15 @@
                             "
                             id="filterComplete"
                         >
-                            <div class="h-8 w-8 bg-daf2a6 rounded-full"></div>
+                            <div
+                                class="
+                                    h-8
+                                    w-8
+                                    bg-daf2a6
+                                    rounded-full
+                                    ring-2 ring-green-300
+                                "
+                            ></div>
                             <span>Complete</span>
                         </div>
                     </div>
@@ -270,66 +302,7 @@
                             overflow-y-auto
                         "
                         id="list"
-                    >
-                        <li class="list-container">
-                            <div class="list-content">
-                                <div class="title-content">
-                                    <div class="text-2xl">Title</div>
-
-                                    <div class="dropdown-container group">
-                                        <i class="fas fa-caret-down"></i>
-                                        <ul class="dropdown-list">
-                                            <li
-                                                class="
-                                                    modal-open
-                                                    dropdown-listItems
-                                                "
-                                            >
-                                                Edit
-                                            </li>
-                                            <li class="dropdown-listItems">
-                                                Delete
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="list-desc">
-                                    <p>
-                                        Lorem ipsum dolor sit amet consectetur
-                                        adipisicing elit. Dolor commodi
-                                        architecto perspiciatis qui sequi ipsam
-                                        fuga incidunt autem temporibus ratione.
-                                    </p>
-                                </div>
-                                <div class="list-btns">
-                                    <div class="space-x-1">
-                                        <button
-                                            class="bg-yellow-500 rounded-md p-1"
-                                        >
-                                            Todo
-                                        </button>
-                                        <button
-                                            class="bg-d2ceff rounded-md p-1"
-                                        >
-                                            In-progress
-                                        </button>
-                                        <button
-                                            class="bg-daf2a6 rounded-md p-1"
-                                        >
-                                            Complete
-                                        </button>
-                                    </div>
-                                    <div>
-                                        <button>
-                                            <i class="far fa-check-square"></i>
-                                            <span>Check</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+                    ></ul>
                 </div>
             </div>
         </section>

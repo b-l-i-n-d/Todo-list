@@ -106,7 +106,7 @@ addToList = (text, desc) => {
     listBtns.classList.add("list-btns");
 
     let listBtnsLeft = document.createElement("div");
-    listBtnsLeft.classList.add("space-x-1");
+    listBtnsLeft.classList.add("space-x-2");
 
     let todoBtn = document.createElement("button");
     todoBtn.classList.add("todoBtn", "bg-fff9de-600", "rounded-md", "p-1");
@@ -132,7 +132,7 @@ addToList = (text, desc) => {
     let checkBtn = document.createElement("button");
     checkBtn.classList.add("checkBtn");
     let checkBtnIcon = document.createElement("i");
-    checkBtnIcon.classList.add("far", "fa-check-square");
+    checkBtnIcon.classList.add("far", "fa-square");
     let checkBtnText = document.createElement("span");
     checkBtnText.innerHTML = " Check";
 
@@ -144,15 +144,20 @@ addToList = (text, desc) => {
     node.append(listContent);
     list.appendChild(node);
 
-    editEvent(editBtn, node, listTitle, listDescP);
-    todoEvent(todoBtn, listContent, node, inprogressBtn, completeBtn);
-    checkEvent(checkBtn, node, listContent, inprogressBtn, completeBtn);
-    inprogressEvent(inprogressBtn, listContent, node, completeBtn);
-    completeEvent(completeBtn, listContent, node, inprogressBtn);
+    editEvent(editBtn, listTitle, listDescP);
+    todoEvent(todoBtn, listContent, node, inprogressBtn, completeBtn, checkBtnIcon);
+    checkEvent(checkBtn, checkBtnIcon, node, listContent, inprogressBtn, completeBtn);
+    inprogressEvent(inprogressBtn, listContent, node, completeBtn, checkBtnIcon);
+    completeEvent(completeBtn, listContent, node, inprogressBtn, checkBtnIcon);
     deleteEvent(deleteBtn, node);
+    filterAllBtn.classList.add("bg-gray-200");
+    filterTodoBtn.classList.remove("bg-gray-200");
+    filterInprogressBtn.classList.remove("bg-gray-200");
+    filterCompleteBtn.classList.remove("bg-gray-200");
+    filterList('all');
 };
 
-editEvent = (editBtn, node, listTitle, listDescP) => {
+editEvent = (editBtn, listTitle, listDescP) => {
     editBtn.addEventListener("click", () => {
         toggleModal();
         let modalContent = document.querySelectorAll(".modal-content p span");
@@ -176,19 +181,24 @@ editEvent = (editBtn, node, listTitle, listDescP) => {
     });
 };
 
-checkEvent = (checkBtn, node, listContent, inprogressBtn, completeBtn) => {
+checkEvent = (checkBtn, checkBtnIcon, node, listContent, inprogressBtn, completeBtn) => {
     checkBtn.addEventListener("click", () => {
         if (node.classList.contains("inprogress")) {
             node.classList.remove("inprogress");
             inprogressBtn.classList.remove("bg-d2ceff-600");
             listContent.classList.remove("bg-d2ceff");
-        } else {
+        } else if (node.classList.contains("complete")) {
             node.classList.remove("complete");
             completeBtn.classList.remove("bg-daf2a6-600");
             listContent.classList.remove("bg-daf2a6");
+        } else {
+            node.classList.remove('todo');
         }
         node.classList.toggle("line-through");
         node.classList.toggle("checked");
+
+        checkBtnIcon.classList.toggle('fa-square');
+        checkBtnIcon.classList.toggle('fa-check-square');
 
         // sortCheckedEvent();
     });
@@ -200,10 +210,12 @@ deleteEvent = (deleteBtn, node) => {
     });
 };
 
-inprogressEvent = (inprogressBtn, listContent, node, completeBtn) => {
+inprogressEvent = (inprogressBtn, listContent, node, completeBtn, checkBtnIcon) => {
     inprogressBtn.addEventListener("click", () => {
         if (node.classList.contains("checked")) {
             node.classList.remove("checked", "line-through");
+            checkBtnIcon.classList.remove('fa-check-square');
+            checkBtnIcon.classList.add('fa-square');
         } else if (node.classList.contains("complete")) {
             node.classList.remove("complete");
             completeBtn.classList.remove("bg-daf2a6-600");
@@ -218,7 +230,7 @@ inprogressEvent = (inprogressBtn, listContent, node, completeBtn) => {
     });
 };
 
-todoEvent = (todoBtn, listContent, node, inprogressBtn, completeBtn) => {
+todoEvent = (todoBtn, listContent, node, inprogressBtn, completeBtn, checkBtnIcon) => {
     todoBtn.addEventListener("click", () => {
         if (node.classList.contains("inprogress")) {
             node.classList.remove("inprogress");
@@ -226,6 +238,8 @@ todoEvent = (todoBtn, listContent, node, inprogressBtn, completeBtn) => {
             listContent.classList.remove("bg-d2ceff");
         } else if (node.classList.contains("checked")) {
             node.classList.remove("checked", "line-through");
+            checkBtnIcon.classList.remove('fa-check-square');
+            checkBtnIcon.classList.add('fa-square');
         } else {
             node.classList.remove("complete");
             completeBtn.classList.remove("bg-daf2a6-600");
@@ -236,7 +250,7 @@ todoEvent = (todoBtn, listContent, node, inprogressBtn, completeBtn) => {
     });
 };
 
-completeEvent = (completeBtn, listContent, node, inprogressBtn) => {
+completeEvent = (completeBtn, listContent, node, inprogressBtn, checkBtnIcon) => {
     completeBtn.addEventListener("click", () => {
         if (node.classList.contains("inprogress")) {
             node.classList.remove("inprogress");
@@ -244,6 +258,8 @@ completeEvent = (completeBtn, listContent, node, inprogressBtn) => {
             listContent.classList.remove("bg-d2ceff");
         } else if (node.classList.contains("checked")) {
             node.classList.remove("checked", "line-through");
+            checkBtnIcon.classList.remove('fa-check-square');
+            checkBtnIcon.classList.add('fa-square');
         } else {
             node.classList.toggle("todo");
         }
