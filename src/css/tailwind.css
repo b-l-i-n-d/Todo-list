@@ -19,7 +19,7 @@
     }
 
     .title-content {
-        @apply flex justify-between items-center;
+        @apply flex justify-between items-center text-2xl;
     }
 
     .list-desc {
@@ -34,7 +34,7 @@
     }
 
     .dropdown-container {
-        @apply inline-block relative;
+        @apply inline-block relative text-sm;
     }
 
     .dropdown-list {
@@ -43,7 +43,7 @@
         -left-16
         top-0
         rounded-lg
-        text-sm
+        cursor-pointer
         group-hover:block;
     }
 
@@ -53,6 +53,7 @@
         hover:bg-gray-100
         py-2
         px-4
+        cursor-pointer
         block;
     }
 }

@@ -1,6 +1,8 @@
+const plusBtn = document.getElementById("plusBtn");
 const inputText = document.getElementById("inputText");
 const inputDesc = document.getElementById("inputDesc");
 const submitBtn = document.getElementById("submitBtn");
+const saveEditBtn = document.getElementById("saveEditBtn");
 
 const filterAllBtn = document.getElementById("filterAll");
 const filterInprogressBtn = document.getElementById("filterInprogress");
@@ -9,6 +11,18 @@ const filterCompleteBtn = document.getElementById("filterComplete");
 
 const list = document.getElementById("list");
 const listItems = list.getElementsByTagName("li");
+
+plusBtn.addEventListener("click", () => {
+    let modalContent = document.querySelectorAll(".modal-content p span");
+    let modalFooter = document.querySelectorAll(".modal-content button");
+
+    modalContent[0].classList.remove("hidden");
+    modalContent[1].classList.add("hidden");
+
+    modalFooter[0].classList.remove("hidden");
+    modalFooter[1].classList.add("hidden");
+    document.getElementById("addListForm").reset();
+});
 
 submitBtn.addEventListener("click", () => {
     if (inputText.value || inputDesc.value) {
@@ -60,22 +74,21 @@ addToList = (text, desc) => {
     titileContent.classList.add("title-content");
 
     let listTitle = document.createElement("div");
-    listTitle.classList.add("text-2xl");
     listTitle.contentEditable = true;
     listTitle.innerHTML = text;
 
-    let dropdownContainer = document.createElement('div');
-    dropdownContainer.classList.add('dropdown-container', 'group');
-    let dropdownIcon = document.createElement('i');
-    dropdownIcon.classList.add('fas', 'fa-caret-down');
-    let dropdownList = document.createElement('ul');
-    dropdownList.classList.add('dropdown-list');
-    let editBtn = document.createElement('li');
-    editBtn.classList.add('modal-open', 'dropdown-listItems');
-    editBtn.innerText = 'Edit';
+    let dropdownContainer = document.createElement("div");
+    dropdownContainer.classList.add("dropdown-container", "group");
+    let dropdownIcon = document.createElement("i");
+    dropdownIcon.classList.add("fas", "fa-caret-down");
+    let dropdownList = document.createElement("ul");
+    dropdownList.classList.add("dropdown-list");
+    let editBtn = document.createElement("li");
+    editBtn.classList.add("modal-open", "dropdown-listItems");
+    editBtn.innerText = "Edit";
     let deleteBtn = document.createElement("li");
-    deleteBtn.classList.add('dropdown-listItems');
-    deleteBtn.innerText = 'Delete';
+    deleteBtn.classList.add("dropdown-listItems");
+    deleteBtn.innerText = "Delete";
 
     dropdownList.append(editBtn, deleteBtn);
     dropdownContainer.append(dropdownIcon, dropdownList);
@@ -131,7 +144,7 @@ addToList = (text, desc) => {
     node.append(listContent);
     list.appendChild(node);
 
-    editEvent(editBtn, listTitle, listDescP);
+    editEvent(editBtn, node, listTitle, listDescP);
     todoEvent(todoBtn, listContent, node, inprogressBtn, completeBtn);
     checkEvent(checkBtn, node, listContent, inprogressBtn, completeBtn);
     inprogressEvent(inprogressBtn, listContent, node, completeBtn);
@@ -139,20 +152,27 @@ addToList = (text, desc) => {
     deleteEvent(deleteBtn, node);
 };
 
-editEvent = (editBtn, listTitle, listDescP) => {
+editEvent = (editBtn, node, listTitle, listDescP) => {
     editBtn.addEventListener("click", () => {
         toggleModal();
         let modalContent = document.querySelectorAll(".modal-content p span");
+        let modalFooter = document.querySelectorAll(".modal-content button");
         let editText = document.getElementById("inputText");
         let editDesc = document.getElementById("inputDesc");
-
 
         modalContent[0].classList.add("hidden");
         modalContent[1].classList.remove("hidden");
 
+        modalFooter[0].classList.add("hidden");
+        modalFooter[1].classList.remove("hidden");
+
         editText.value = listTitle.innerText;
         editDesc.value = listDescP.innerText;
 
+        saveEditBtn.addEventListener("click", () => {
+            listTitle.replaceWith(editText.value);
+            listDescP.replaceWith(editDesc.value);
+        });
     });
 };
 
@@ -170,7 +190,7 @@ checkEvent = (checkBtn, node, listContent, inprogressBtn, completeBtn) => {
         node.classList.toggle("line-through");
         node.classList.toggle("checked");
 
-        sortCheckedEvent();
+        // sortCheckedEvent();
     });
 };
 

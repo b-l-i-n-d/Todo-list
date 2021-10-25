@@ -21,7 +21,7 @@
                             <span class="text-d2ceff-600">o</span>
                         </a>
                     </div>
-                    <div class="modal-open cursor-pointer">
+                    <div class="modal-open cursor-pointer" id="plusBtn">
                         <i class="fas fa-plus fa-lg text-69665c"></i>
                     </div>
 
@@ -88,7 +88,7 @@
                             <div class="modal-content py-4 text-left px-6">
                                 <!--Title-->
                                 <div class="flex justify-between items-center">
-                                    <p class="text-2xl font-bold">
+                                    <p class="text-2xl font-bold" id="modalgg">
                                         <span>Add</span>
                                         <span class="hidden">Edit</span>
                                         <span class="text-d1e5f7">t</span>
@@ -150,10 +150,29 @@
                                             rounded-lg
                                             hover:bg-gray-200
                                             hover:text-gray-700
+                                            transition-all
+                                            duration-300
                                         "
                                         id="submitBtn"
                                     >
                                         Add
+                                    </button>
+                                    <button
+                                        class="
+                                            modal-close
+                                            hidden
+                                            px-7
+                                            bg-gray-100
+                                            p-2
+                                            rounded-lg
+                                            hover:bg-green-400
+                                            hover:text-gray-100
+                                            transition-all
+                                            duration-300
+                                        "
+                                        id="saveEditBtn"
+                                    >
+                                        Save
                                     </button>
                                     <button
                                         class="
@@ -164,6 +183,8 @@
                                             rounded-lg
                                             text-white
                                             hover:bg-gray-700
+                                            transition-all
+                                            duration-300
                                         "
                                     >
                                         Cancle
