@@ -26,6 +26,8 @@
 -   Edit
 -   Update
 -   Delete
+-   Catagorise list items
+-   Filter by categories
 
 ## Screenshots
 
