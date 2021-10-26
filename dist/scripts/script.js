@@ -74,19 +74,18 @@ addToList = (text, desc) => {
     titileContent.classList.add("title-content");
 
     let listTitle = document.createElement("div");
-    listTitle.contentEditable = true;
     listTitle.innerHTML = text;
 
     let dropdownContainer = document.createElement("div");
     dropdownContainer.classList.add("dropdown-container", "group");
     let dropdownIcon = document.createElement("i");
     dropdownIcon.classList.add("fas", "fa-caret-down");
-    let dropdownList = document.createElement("ul");
+    let dropdownList = document.createElement("div");
     dropdownList.classList.add("dropdown-list");
-    let editBtn = document.createElement("li");
+    let editBtn = document.createElement("div");
     editBtn.classList.add("modal-open", "dropdown-listItems");
     editBtn.innerText = "Edit";
-    let deleteBtn = document.createElement("li");
+    let deleteBtn = document.createElement("div");
     deleteBtn.classList.add("dropdown-listItems");
     deleteBtn.innerText = "Delete";
 
@@ -98,7 +97,6 @@ addToList = (text, desc) => {
     let listDesc = document.createElement("div");
     listDesc.classList.add("list-desc");
     let listDescP = document.createElement("p");
-    listDescP.contentEditable = true;
     listDescP.innerHTML = desc;
     listDesc.append(listDescP);
 
@@ -142,7 +140,7 @@ addToList = (text, desc) => {
     listBtns.append(listBtnsLeft, listBtnsRight);
     listContent.append(titileContent, listDesc, listBtns);
     node.append(listContent);
-    list.appendChild(node);
+    list.insertBefore(node, list.firstChild);
 
     editEvent(editBtn, listTitle, listDescP);
     todoEvent(todoBtn, listContent, node, inprogressBtn, completeBtn, checkBtnIcon);
@@ -156,6 +154,7 @@ addToList = (text, desc) => {
     filterCompleteBtn.classList.remove("bg-gray-200");
     filterList('all');
 };
+
 
 editEvent = (editBtn, listTitle, listDescP) => {
     editBtn.addEventListener("click", () => {

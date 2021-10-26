@@ -48,7 +48,7 @@
     }
 
     .dropdown-listItems {
-        @apply rounded-t
+        @apply rounded-lg
         bg-white
         hover:bg-gray-100
         py-2
