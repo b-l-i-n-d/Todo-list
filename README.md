@@ -16,7 +16,7 @@
 
 ---
 
-[Todo List]('https://elegant-kilby-7b1e4e.netlify.app/')
+[Todo List](https://elegant-kilby-7b1e4e.netlify.app/)
 
 <br>
 
