@@ -6,7 +6,7 @@
 
 @layer components {
     .list-container {
-        @apply w-full flex flex-col md:w-1/2 p-3;
+        @apply w-full flex flex-col md:w-1/2 px-0 pb-6 md:px-3 md:pt-0;
     }
 
     .list-content {
@@ -19,7 +19,7 @@
     }
 
     .title-content {
-        @apply flex justify-between items-center text-2xl;
+        @apply flex justify-between items-center text-xl md:text-2xl;
     }
 
     .list-desc {

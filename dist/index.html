@@ -12,8 +12,8 @@
     <body class="text-69665c">
         <nav class="bg-white font-ubuntu fixed top-0 inset-x-0 z-10">
             <div class="max-w-6xl mx-auto px-4">
-                <div class="flex h-24 items-center justify-between">
-                    <div class="font-semibold text-4xl">
+                <div class="flex h-20 items-center justify-between">
+                    <div class="font-semibold text-2xl sm:text-3xl md:text-4xl">
                         <a href="#">
                             <span class="text-d1e5f7-600">t</span>
                             <span class="text-ffcece-600">o</span>
@@ -63,7 +63,9 @@
                                 shadow-lg
                                 z-50
                                 overflow-y-auto
-                                p-10
+                                p-3
+                                sm:p-5
+                                md:p-10
                             "
                         >
                             <div
@@ -85,10 +87,24 @@
                             </div>
 
                             <!-- Add margin if you want to see some of the overlay behind the modal-->
-                            <div class="modal-content py-4 text-left px-6">
+                            <div
+                                class="
+                                    modal-content
+                                    py-2
+                                    sm:py-3
+                                    lg:py-4
+                                    text-left
+                                    px-2
+                                    sm:px-4
+                                    md:px-6
+                                "
+                            >
                                 <!--Title-->
                                 <div class="flex justify-between items-center">
-                                    <p class="text-2xl font-bold" id="modalgg">
+                                    <p
+                                        class="text-xl md:text-2xl font-bold"
+                                        id="modalgg"
+                                    >
                                         <span>Add</span>
                                         <span class="hidden">Edit</span>
                                         <span class="text-d1e5f7">t</span>
@@ -108,8 +124,10 @@
                                     id="addListForm"
                                     class="
                                         flex flex-wrap flex-col
-                                        space-y-4
-                                        py-6
+                                        space-y-2
+                                        md:space-y-4
+                                        py-3
+                                        md:py-6
                                     "
                                 >
                                     <label class="font-semibold" for="text"
@@ -144,7 +162,8 @@
                                     <button
                                         class="
                                             modal-close
-                                            px-7
+                                            px-4
+                                            md:px-7
                                             bg-gray-100
                                             p-2
                                             rounded-lg
@@ -161,7 +180,8 @@
                                         class="
                                             modal-close
                                             hidden
-                                            px-7
+                                            px-4
+                                            md:px-7
                                             bg-gray-100
                                             p-2
                                             rounded-lg
@@ -177,7 +197,8 @@
                                     <button
                                         class="
                                             modal-close
-                                            px-7
+                                            px-4
+                                            md:px-7
                                             bg-69665c
                                             p-2
                                             rounded-lg
@@ -197,16 +218,37 @@
             </div>
         </nav>
 
-        <section class="pt-32">
+        <section class="pt-20 md:pt-32">
             <div class="max-w-6xl mx-auto px-4 max-h-screen">
-                <div class="flex flex-wrap font-ubuntu h-full scrollbar-hide">
-                    <div class="flex flex-col font-medium w-1/5 space-y-6">
+                <div
+                    class="flex flex-col md:flex-row font-ubuntu scrollbar-hide"
+                >
+                    <div
+                        class="
+                            flex flex-row
+                            md:flex-col
+                            font-medium
+                            w-full
+                            md:w-1/5 md:space-y-6
+                            justify-between
+                            md:justify-start
+                            items-center
+                            md:items-stretch
+                            text-xs
+                            sm:text-base
+                            mb-3
+                            md:mb-0
+                        "
+                    >
                         <div
                             class="
-                                flex flex-1 flex-grow-0
-                                space-x-3
+                                flex flex-1
+                                md:flex-grow-0
+                                space-x-1
+                                md:space-x-3
                                 p-2
                                 items-center
+                                bg-gray-200
                                 hover:bg-gray-100
                                 rounded-lg
                             "
@@ -214,8 +256,10 @@
                         >
                             <div
                                 class="
-                                    h-8
-                                    w-8
+                                    h-4
+                                    md:h-8
+                                    w-4
+                                    md:w-8
                                     bg-ffcece
                                     rounded-full
                                     ring-2 ring-red-300
@@ -225,8 +269,10 @@
                         </div>
                         <div
                             class="
-                                flex flex-1 flex-grow-0
-                                space-x-3
+                                flex flex-1
+                                md:flex-grow-0
+                                space-x-1
+                                md:space-x-3
                                 p-2
                                 items-center
                                 hover:bg-gray-100
@@ -236,8 +282,10 @@
                         >
                             <div
                                 class="
-                                    h-8
-                                    w-8
+                                    h-4
+                                    md:h-8
+                                    w-4
+                                    md:w-8
                                     bg-fff9de
                                     rounded-full
                                     ring-2 ring-yellow-400
@@ -247,8 +295,10 @@
                         </div>
                         <div
                             class="
-                                flex flex-1 flex-grow-0
-                                space-x-3
+                                flex flex-1
+                                md:flex-grow-0
+                                space-x-1
+                                md:space-x-3
                                 p-2
                                 items-center
                                 hover:bg-gray-100
@@ -258,19 +308,23 @@
                         >
                             <div
                                 class="
-                                    h-8
-                                    w-8
+                                    h-4
+                                    md:h-8
+                                    w-4
+                                    md:w-8
                                     bg-d2ceff
                                     rounded-full
                                     ring-2 ring-purple-400
                                 "
                             ></div>
-                            <span>In-progress</span>
+                            <span>Inprogress</span>
                         </div>
                         <div
                             class="
-                                flex flex-1 flex-grow-0
-                                space-x-3
+                                flex flex-1
+                                md:flex-grow-0
+                                space-x-1
+                                md:space-x-3
                                 p-2
                                 items-center
                                 hover:bg-gray-100
@@ -280,8 +334,10 @@
                         >
                             <div
                                 class="
-                                    h-8
-                                    w-8
+                                    h-4
+                                    md:h-8
+                                    w-4
+                                    md:w-8
                                     bg-daf2a6
                                     rounded-full
                                     ring-2 ring-green-300
@@ -294,10 +350,11 @@
                     <ul
                         class="
                             flex flex-wrap
-                            w-4/5
-                            pl-2
+                            md:flex-row
+                            w-full
+                            md:w-4/5 md:pl-2
                             font-poppins
-                            h-screen-4/5
+                            max-h-screen-4/5
                             scrollbar-hide
                             overflow-y-auto
                         "
